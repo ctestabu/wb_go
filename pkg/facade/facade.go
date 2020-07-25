@@ -2,14 +2,14 @@ package facade
 
 //local
 type changer interface {
-	//change customFile
-	//list files
+	ChangeFile(fileName, format string) (msg string, err error)
+	ListFilesToChange() (msg string, err error)
 }
 
 //local
-type file interface {
+type customFile interface {
 	//giveConvertedFile
-	giveConvertedFile(fileName string) (err error)
+	GiveConvertedFile(fileName string) (err error)
 }
 
 type Converter interface {
@@ -18,7 +18,7 @@ type Converter interface {
 }
 
 type converter struct {
-	files    file
+	files    customFile
 	toChange changer
 }
 
@@ -26,16 +26,16 @@ func (c *converter) Receive(fileNames ...string) (msg string, err error) {
 	//logs?
 	//main control function
 	for _, names := range fileNames {
-		if err = c.files.giveConvertedFile(names); err != nil {
+		if err = c.files.GiveConvertedFile(names); err != nil {
 			return
 		}
-		//todo changefile(convert); list changet files; logs
+
 	}
 	return
 }
 
-//Crestes new Converter entity
-func NewConverter(files file, toChange changer) Converter {
+//Creates new Converter entity
+func NewConverter(files customFile, toChange changer) Converter {
 	return &converter{
 		files:    files,
 		toChange: toChange,
