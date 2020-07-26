@@ -3,6 +3,7 @@ package customFile
 import (
 	"errors"
 	v1 "facade/pkg/api/v1"
+	"fmt"
 	"os"
 )
 
@@ -15,6 +16,7 @@ type customFile struct {
 }
 
 func (c *customFile) GiveConvertedFile(fileName string) (err error) {
+	fmt.Println("-------------1",fileName)
 	file, err := os.Create(fileName)
 	if err != nil {
 		err =  errors.New(v1.CreateFileError)

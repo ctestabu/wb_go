@@ -6,7 +6,7 @@ import (
 )
 
 type changer interface {
-	ChangeFile(fileName, format string) (msg string, err error) // change file format
+	ChangeFileName(fileName, format string) (msg string, err error) // change file format
 	ListFilesToChange() (msg string, err error) // Lst of changed files
 }
 
@@ -28,13 +28,13 @@ func (c *converter) Receive(fileName string, format string) (msg string, err err
 	var logger = make([]string, 0)
 	var log string
 
-	log,err = c.toChange.ChangeFile(fileName, format)
+	log,err = c.toChange.ListFilesToChange()
 	if err != nil {
 		return
 	}
 	logger = append(logger, log)
 
-	log,err = c.toChange.ListFilesToChange()
+	log,err = c.toChange.ChangeFileName(fileName, format)
 	if err != nil {
 		return
 	}
