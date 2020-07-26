@@ -2,11 +2,11 @@ package customFile
 
 import (
 	"errors"
+	v1 "facade/pkg/api/v1"
 	"os"
 )
 
 type CustomFile interface {
-	//giveConvertedFile
 	GiveConvertedFile(fileName string) (err error)
 }
 
@@ -17,7 +17,7 @@ type customFile struct {
 func (c *customFile) GiveConvertedFile(fileName string) (err error) {
 	file, err := os.Create(fileName)
 	if err != nil {
-		err =  errors.New("Too bad")
+		err =  errors.New(v1.CreateFileError)
 		os.Exit(1)
 	}
 	//  https://www.joeshaw.org/dont-defer-close-on-writable-files/
@@ -29,7 +29,6 @@ func (c *customFile) GiveConvertedFile(fileName string) (err error) {
 	}()
 	return
 }
-
 
 func New(fileNames []string) CustomFile {
 	return &customFile{

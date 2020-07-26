@@ -1,20 +1,22 @@
 package facade
 
-//local
+import (
+	v1 "facade/pkg/api/v1"
+	"strings"
+)
+
 type changer interface {
-	ChangeFile(fileName, format string) (msg string, err error)
-	ListFilesToChange() (msg string, err error)
+	ChangeFile(fileName, format string) (msg string, err error) // change file format
+	ListFilesToChange() (msg string, err error) // Lst of changed files
 }
 
-//local
 type customFile interface {
-	//giveConvertedFile
-	GiveConvertedFile(fileName string) (err error)
+	GiveConvertedFile(fileName string) (err error) // Creates file
 }
 
+//Control interface to change file extension
 type Converter interface {
-	//method Receive
-	Receive(fileNames ...string) (msg string, err error)
+	Receive(fileName string, format string) (msg string, err error)
 }
 
 type converter struct {
@@ -22,15 +24,27 @@ type converter struct {
 	toChange changer
 }
 
-func (c *converter) Receive(fileNames ...string) (msg string, err error) {
-	//logs?
-	//main control function
-	for _, names := range fileNames {
-		if err = c.files.GiveConvertedFile(names); err != nil {
-			return
-		}
+func (c *converter) Receive(fileName string, format string) (msg string, err error) {
+	var logger = make([]string, 0)
+	var log string
 
+	log,err = c.toChange.ChangeFile(fileName, format)
+	if err != nil {
+		return
 	}
+	logger = append(logger, log)
+
+	log,err = c.toChange.ListFilesToChange()
+	if err != nil {
+		return
+	}
+	logger = append(logger, log)
+
+	err = c.files.GiveConvertedFile(fileName)
+	if err != nil {
+		return
+	}
+	msg = strings.Join(logger, v1.LogSeparator)
 	return
 }
 
