@@ -2,15 +2,15 @@ package changer
 
 import (
 	"errors"
-	v1 "github.com/wb_go/facade/pkg/api/v1"
 	"fmt"
+	v1 "github.com/wb_go/facade/pkg/api/v1"
 	"strings"
 )
 
-//Methods for Changer interface
+//Changer where file extension changes
 type Changer interface {
 	ChangeFileName(fileName, format string) (msg string, err error)
-	GetFileToChange()(str string)
+	GetFileToChange() (str string)
 }
 
 type changer struct {
@@ -18,7 +18,7 @@ type changer struct {
 }
 
 //ChangeFileName gets filename and changes its format
-func (c *changer) ChangeFileName(fileName, format string)(msg string, err error) {
+func (c *changer) ChangeFileName(fileName, format string) (msg string, err error) {
 	msg = fmt.Sprintf(v1.FileToConvert, fileName)
 	if fileName == "" {
 		err = errors.New(v1.InvalidParameters)
@@ -31,11 +31,11 @@ func (c *changer) ChangeFileName(fileName, format string)(msg string, err error)
 }
 
 //GetFileToChange returns modified in ChangeFileName fileName
-func (c *changer) GetFileToChange ()(str string) {
+func (c *changer) GetFileToChange() (str string) {
 	return c.filesToChange
 }
 
-//Creates new changer entity
+//New creates changer entity
 func New(fileName string) Changer {
 	return &changer{
 		filesToChange: fileName,

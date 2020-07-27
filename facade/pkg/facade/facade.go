@@ -7,14 +7,14 @@ import (
 
 type changer interface {
 	ChangeFileName(fileName, format string) (msg string, err error)
-	GetFileToChange()(str string)
+	GetFileToChange() (str string)
 }
 
 type customFile interface {
 	GiveConvertedFile(fileName string) (err error)
 }
 
-//Control interface to change file extension
+//Converter interface to change file extension
 type Converter interface {
 	Receive(fileName string, format string) (msg string, err error)
 }
@@ -23,12 +23,13 @@ type converter struct {
 	files    customFile
 	toChange changer
 }
+
 //Receive method gets string(name of file to be created), changes its extension to format
 func (c *converter) Receive(fileName string, format string) (msg string, err error) {
 	var logger = make([]string, 0)
 	var log string
 
-	log,err = c.toChange.ChangeFileName(fileName, format)
+	log, err = c.toChange.ChangeFileName(fileName, format)
 	if err != nil {
 		return
 	}
@@ -42,7 +43,7 @@ func (c *converter) Receive(fileName string, format string) (msg string, err err
 	return
 }
 
-//Creates new Converter entity
+//NewConverter creates new entity
 func NewConverter(files customFile, toChange changer) Converter {
 	return &converter{
 		files:    files,
