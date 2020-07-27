@@ -25,6 +25,8 @@ func (c *changer) ChangeFileName(fileName, format string) (msg string, err error
 	}
 	if strings.HasSuffix(fileName, ".old") {
 		fileName = strings.Replace(fileName, ".old", format, 1)
+	} else {
+		err = errors.New(v1.WrongSuffix)
 	}
 	c.filesToChange = fileName
 	return
