@@ -9,22 +9,26 @@ import (
 	"fmt"
 )
 
+const (
+	errorReceiver = "Error occurred while Receive method called"
+)
+
 var (
 	list = []string{"test1.old", "test2.old", "test3.old"}
-	refreshedList = make([]string, 3)
+	refreshedList string
 )
 
 func main() {
-	change := changer.New(list)
-	cfile := customFile.New(refreshedList)
-
-	rec := facade.NewConverter(cfile, change)
-
-	res, err := rec.Receive(list[1], ".lal")
-	if err != nil {
-		fmt.Println("OMG")
-		return
+	for i, _ := range list {
+		change := changer.New(list[i])
+		cfile := customFile.New(refreshedList)
+		rec := facade.NewConverter(cfile, change)
+		res, err := rec.Receive(list[i], ".lal")
+		if err != nil {
+			fmt.Println(errorReceiver)
+			return
+		}
+		fmt.Println(res)
 	}
-	fmt.Printf("1 1 1 %+v\n", res)
-	fmt.Println("-------------")
+
 }
