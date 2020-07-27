@@ -3,9 +3,9 @@
 package main
 
 import (
-	"facade/pkg/changer"
-	"facade/pkg/customFile"
-	"facade/pkg/facade"
+	"github.com/wb_go/facade/pkg/changer"
+	"github.com/wb_go/facade/pkg/customFile"
+	"github.com/wb_go/facade/pkg/facade"
 	"fmt"
 )
 

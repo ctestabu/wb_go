@@ -2,7 +2,7 @@ package customFile
 
 import (
 	"errors"
-	v1 "facade/pkg/api/v1"
+	v1 "github.com/wb_go/facade/pkg/api/v1"
 	"os"
 )
 
