@@ -7,14 +7,14 @@ import (
 
 const (
 	methodNameGiveConvertedFile = "GiveConvertedFile"
-	validInput = "test1.old"
-	empty = ""
-	invalidInput = "test1.invalid"
+	validInput                  = "test1.old"
+	empty                       = ""
+	invalidInput                = "test1.invalid"
 )
 
 func TestCustomFileSuccessGiveConvertedFile(t *testing.T) {
 	t.Run(methodNameGiveConvertedFile, func(t *testing.T) {
-		f:= New(validInput)
+		f := New(validInput)
 		err := f.GiveConvertedFile(validInput)
 		assert.NoError(t, err)
 	})
@@ -22,7 +22,7 @@ func TestCustomFileSuccessGiveConvertedFile(t *testing.T) {
 
 func TestCustomFileEmptyGiveConvertedFile(t *testing.T) {
 	t.Run(methodNameGiveConvertedFile, func(t *testing.T) {
-		f:= New(empty)
+		f := New(empty)
 		err := f.GiveConvertedFile(empty)
 		assert.Error(t, err)
 	})

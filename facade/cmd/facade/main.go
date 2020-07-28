@@ -12,7 +12,7 @@ const (
 )
 
 var (
-	list          = []string{"test1.old"/*, "test2.old", "test3.old"*/}
+	list          = []string{"test1.old" /*, "test2.old", "test3.old"*/}
 	refreshedList string
 )
 
