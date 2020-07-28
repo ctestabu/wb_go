@@ -8,7 +8,7 @@ import (
 
 const (
 	methodNameGiveConvertedFile = "GiveConvertedFile"
-	validInput                  = "test1.old"
+	validInput                  = "test1.lal"
 )
 
 func TestCustomFileSuccessGiveConvertedFile(t *testing.T) {
