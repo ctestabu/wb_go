@@ -1,10 +1,11 @@
 package facade
 
 import (
+	"testing"
+
 	"github.com/stretchr/testify/assert"
 	changer2 "github.com/wb_go/facade/pkg/changer"
 	"github.com/wb_go/facade/pkg/customfile"
-	"testing"
 )
 
 const (
@@ -16,9 +17,6 @@ const (
 	validInput                  = "test1.old"
 	validOut                    = "test1.lal"
 	validFormat                 = ".lal"
-	FileToConvertMessage        = "File to convert test1.old"
-	empty                       = ""
-	invalidInput                = "test1.invalid"
 )
 
 func TestConverterSuccessReceive(t *testing.T) {

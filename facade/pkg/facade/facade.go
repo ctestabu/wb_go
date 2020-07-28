@@ -1,8 +1,9 @@
 package facade
 
 import (
-	v1 "github.com/wb_go/facade/pkg/api/v1"
 	"strings"
+
+	v1 "github.com/wb_go/facade/pkg/api/v1"
 )
 
 type changer interface {
@@ -14,7 +15,7 @@ type customFile interface {
 	GiveConvertedFile(fileName string) (err error)
 }
 
-//Converter interface to change file extension
+// Converter interface to change file extension
 type Converter interface {
 	Receive(fileName string, format string) (msg string, err error)
 }
@@ -24,7 +25,7 @@ type converter struct {
 	toChange changer
 }
 
-//Receive method gets string(name of file to be created), changes its extension to format
+// Receive method gets string(name of file to be created), changes its extension to format
 func (c *converter) Receive(fileName string, format string) (msg string, err error) {
 	var logger = make([]string, 0)
 	var log string

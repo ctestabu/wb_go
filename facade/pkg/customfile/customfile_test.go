@@ -1,8 +1,9 @@
 package customfile
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 const (
@@ -14,7 +15,7 @@ const (
 
 func TestCustomFileSuccessGiveConvertedFile(t *testing.T) {
 	t.Run(methodNameGiveConvertedFile, func(t *testing.T) {
-		f := New(validInput)
+		f := NewCustomFile(validInput)
 		err := f.GiveConvertedFile(validInput)
 		assert.NoError(t, err)
 	})
@@ -22,7 +23,7 @@ func TestCustomFileSuccessGiveConvertedFile(t *testing.T) {
 
 func TestCustomFileEmptyGiveConvertedFile(t *testing.T) {
 	t.Run(methodNameGiveConvertedFile, func(t *testing.T) {
-		f := New(empty)
+		f := NewCustomFile(empty)
 		err := f.GiveConvertedFile(empty)
 		assert.Error(t, err)
 	})
