@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
 	changer2 "github.com/wb_go/facade/pkg/changer"
 	"github.com/wb_go/facade/pkg/customfile"
 )
@@ -21,14 +22,14 @@ const (
 
 func TestConverterSuccessReceive(t *testing.T) {
 	t.Run(methodNameReceive, func(t *testing.T) {
-		changer := new(changer2.MockChanger)
-		changer.On(methodNameChangeFileName, validInput, validFormat).Return(expectedOut, nil).Once()
-		changer.On(methodNameGetFileToChange).Return(validOut).Once()
+		toChange := new(changer2.MockChanger)
+		toChange.On(methodNameChangeFileName, validInput, validFormat).Return(expectedOut, nil).Once()
+		toChange.On(methodNameGetFileToChange).Return(validOut).Once()
 
 		customFile := new(customfile.MockCustomfile)
 		customFile.On(methodNameGiveConvertedFile, validOut).Return(nil).Once()
 
-		res := NewConverter(customFile, changer)
+		res := NewConverter(customFile, toChange)
 		_, err := res.Receive(validInput, validFormat)
 		assert.NoError(t, err, expectedOut, err)
 

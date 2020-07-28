@@ -24,7 +24,7 @@ func main() {
 		rec := facade.NewConverter(cfile, change)
 		res, err := rec.Receive(list[i], ".lal")
 		if err != nil {
-			fmt.Println(errorReceiver)
+			fmt.Println(errorReceiver, err)
 			return
 		}
 		fmt.Println(res)

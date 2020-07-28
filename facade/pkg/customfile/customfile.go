@@ -13,7 +13,7 @@ type customFile struct {
 	fileNames string
 }
 
-// Creates file with modified format
+// GiveConvertedFile сreates file with modified format
 func (c *customFile) GiveConvertedFile(fileName string) (err error) {
 	file, err := os.Create(fileName)
 	if err != nil {

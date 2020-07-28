@@ -9,8 +9,6 @@ import (
 const (
 	methodNameGiveConvertedFile = "GiveConvertedFile"
 	validInput                  = "test1.old"
-	empty                       = ""
-	invalidInput                = "test1.invalid"
 )
 
 func TestCustomFileSuccessGiveConvertedFile(t *testing.T) {
@@ -23,8 +21,8 @@ func TestCustomFileSuccessGiveConvertedFile(t *testing.T) {
 
 func TestCustomFileEmptyGiveConvertedFile(t *testing.T) {
 	t.Run(methodNameGiveConvertedFile, func(t *testing.T) {
-		f := NewCustomFile(empty)
-		err := f.GiveConvertedFile(empty)
+		f := NewCustomFile("")
+		err := f.GiveConvertedFile("")
 		assert.Error(t, err)
 	})
 }
