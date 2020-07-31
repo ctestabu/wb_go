@@ -1,6 +1,6 @@
 package v1
 
 // const ...
-const(
+const (
 	ErrorEmptyReplace = "you cant replace with empty string"
 )
