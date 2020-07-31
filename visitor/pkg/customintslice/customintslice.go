@@ -2,6 +2,8 @@ package customintslice
 
 import (
 	"errors"
+
+	v1 "github.com/wb_go/visitor/pkg/api/v1"
 )
 
 type visitor interface {
@@ -42,7 +44,7 @@ func (c *customIntSlice) ReversSlice() {
 // Insert inserts elem in position
 func (c *customIntSlice) Insert(pos, x int) (err error) {
 	if pos < 0 {
-		err = errors.New("you cant work with negative index")
+		err = errors.New(v1.ErrorIndex)
 		return
 	}
 	c.intSlice = append(c.intSlice, 0)

@@ -3,6 +3,8 @@ package customfloatslice
 import (
 	"errors"
 	"math"
+
+	v1 "github.com/wb_go/visitor/pkg/api/v1"
 )
 
 type visitor interface {
@@ -31,7 +33,7 @@ func (c *customFloatSlice) Accept(v visitor) (err error) {
 // Round rounds all elements in custom slice
 func (c *customFloatSlice) Round() (err error) {
 	if len(c.fltSlice) == 0 {
-		err = errors.New("Dont even bother to do something here")
+		err = errors.New(v1.ErrorLazy)
 		return
 	}
 	for i, j := range c.fltSlice {
