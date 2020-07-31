@@ -2,6 +2,7 @@ package customstrslice
 
 import (
 	"errors"
+	v1 "github.com/wb_go/visitor/pkg/api/v1"
 	"strings"
 )
 
@@ -51,7 +52,7 @@ func (c *customStrSlice) GetFirstElem() (cs string) {
 func (c *customStrSlice) ReplaceFirstElem(str string) (err error) {
 
 	if str == "" {
-		err = errors.New("you cant replace with empty string")
+		err = errors.New(v1.ErrorEmptyReplace)
 	}
 	c.strSlice[0] = str
 	return
