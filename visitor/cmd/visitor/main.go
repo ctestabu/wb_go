@@ -19,29 +19,26 @@ func main() {
 	c := []string{"one", "two", "three"}
 	test := 4
 
+	visit := visitor.NewArr(test)
 	in1 := customintslice.NewCustomIntSlice(a)
 	in2 := customfloatslice.NewCustomFloatSlice(b)
 	in3 := customstrslice.NewCustomStrSlice(c)
 
-	val1 := visitor.NewArr(test)
-	err := in1.Accept(val1)
+	err := in1.Accept(visit)
 	if err != nil {
 		fmt.Println(errorCustomSlice, err)
 	}
 	fmt.Println(in1)
 
-	val2 := visitor.NewArr(test)
-	err = in2.Accept(val2)
+	err = in2.Accept(visit)
 	if err != nil {
 		fmt.Println(errorCustomSlice, err)
 	}
 	fmt.Println(in2)
 
-	val3 := visitor.NewArr(test)
-	err = in3.Accept(val3)
+	err = in3.Accept(visit)
 	if err != nil {
 		fmt.Println(errorCustomSlice, err)
 	}
 	fmt.Println(in3)
-
 }

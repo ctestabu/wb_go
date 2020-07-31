@@ -1,6 +1,9 @@
 package customstrslice
 
-import "strings"
+import (
+	"errors"
+	"strings"
+)
 
 type visitor interface {
 	ReplaceStrSlice(c CustomStrSlice) (err error)
@@ -12,7 +15,7 @@ type CustomStrSlice interface {
 	ToLower()
 	LenSlice() (l int)
 	GetFirstElem() (cs string)
-	ReplaceFirstElem(str string)
+	ReplaceFirstElem(str string) (err error)
 	Accept(v visitor) (err error)
 }
 
@@ -45,8 +48,13 @@ func (c *customStrSlice) GetFirstElem() (cs string) {
 }
 
 // ReplaceFirstElem ...
-func (c *customStrSlice) ReplaceFirstElem(str string) {
+func (c *customStrSlice) ReplaceFirstElem(str string) (err error) {
+
+	if str == "" {
+		err = errors.New("you cant replace with empty string")
+	}
 	c.strSlice[0] = str
+	return
 }
 
 // LenSlice calls standard len to return len of custom slice

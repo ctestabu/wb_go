@@ -28,7 +28,7 @@ func (a *arr) InsertInMiddle(c customintslice.CustomIntSlice) (err error) {
 		return
 	}
 	mid := int(c.LenSlice() / 2)
-	c.Insert(mid, a.elem)
+	err = c.Insert(mid, a.elem)
 	return
 }
 
@@ -39,7 +39,7 @@ func (a *arr) ReplaceStrSlice(c customstrslice.CustomStrSlice) (err error) {
 		return
 	}
 	tmp := strings.Repeat(v1.WordToReplace, a.elem)
-	c.ReplaceFirstElem(tmp)
+	err = c.ReplaceFirstElem(tmp)
 	return
 }
 
@@ -51,7 +51,7 @@ func (a *arr) RoundAndReplace(c customfloatslice.CustomFloatSlice) (err error) {
 	}
 	tmp := float64(a.elem)
 	c.ReplaceFirstElem(tmp)
-	c.Round()
+	err = c.Round()
 	return
 }
 

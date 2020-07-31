@@ -36,9 +36,10 @@ func TestCustomFloatSlice_Round(t *testing.T) {
 	b = []float64{1.1, 2.2, 3.4343, 5.5}
 	t.Run(methodNameRound, func(t *testing.T) {
 		in := NewCustomFloatSlice(b)
-		in.Round()
+		err := in.Round()
 		tmp := in
 		assert.Equal(t, expec, tmp)
+		assert.NoError(t, err)
 	})
 }
 

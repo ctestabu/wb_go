@@ -1,6 +1,9 @@
 package customfloatslice
 
-import "math"
+import (
+	"errors"
+	"math"
+)
 
 type visitor interface {
 	RoundAndReplace(c CustomFloatSlice) (err error)
@@ -8,7 +11,7 @@ type visitor interface {
 
 // CustomFloatSlice describes custom slice methods
 type CustomFloatSlice interface {
-	Round()
+	Round() (err error)
 	SwapFirstAndLast()
 	GetFirstElem() (el float64)
 	ReplaceFirstElem(el float64)
@@ -26,10 +29,15 @@ func (c *customFloatSlice) Accept(v visitor) (err error) {
 }
 
 // Round rounds all elements in custom slice
-func (c *customFloatSlice) Round() {
+func (c *customFloatSlice) Round() (err error) {
+	if len(c.fltSlice) == 0 {
+		err = errors.New("Dont even bother to do something here")
+		return
+	}
 	for i, j := range c.fltSlice {
 		c.fltSlice[i] = math.Round((j * 100) / 100)
 	}
+	return
 }
 
 // SwapFirstAndLast ...

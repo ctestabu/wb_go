@@ -1,5 +1,9 @@
 package customintslice
 
+import (
+	"errors"
+)
+
 type visitor interface {
 	InsertInMiddle(c CustomIntSlice) (err error)
 }
@@ -7,7 +11,7 @@ type visitor interface {
 // CustomIntSlice describes custom slice methods
 type CustomIntSlice interface {
 	ReversSlice()
-	Insert(pos, x int)
+	Insert(pos, x int) (err error)
 	Delete(pos int)
 	LenSlice() (l int)
 	Accept(v visitor) (err error)
@@ -36,10 +40,15 @@ func (c *customIntSlice) ReversSlice() {
 }
 
 // Insert inserts elem in position
-func (c *customIntSlice) Insert(pos, x int) {
+func (c *customIntSlice) Insert(pos, x int) (err error) {
+	if pos < 0 {
+		err = errors.New("you cant work with negative index")
+		return
+	}
 	c.intSlice = append(c.intSlice, 0)
 	copy(c.intSlice[pos+1:], c.intSlice[pos:])
 	c.intSlice[pos] = x
+	return
 }
 
 // Delete ...
